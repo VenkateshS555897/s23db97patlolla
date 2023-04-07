@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1= title
+    -
+     let grasses  = [{"Grass_Name": "Kentucky bluegrass", "Grass_color": "Brown", "Height": "Big",},
+      { "Grass_Name": "Tall Fescue", "Grass_color": "Red", "Height": "medium",},
+       {"Grass_Name": "Ryegrass", "Grass_color": "Yellow", "Height": "small",},]
+    div(class= "container-fluid")
+        div(class = "row")  
+            each item, index in grasses 
+                div(class= "col-sm-2", onclick=`grasses(${index})`) Name:  #{item.Grass_Name}
+                div(class= "col-sm-2", onclick=`grasses(${index})`) Color:  #{item.Grass_color}
+                div(class= "col-sm-2", onclick=`grasses(${index})`) Height:   #{item.Height}

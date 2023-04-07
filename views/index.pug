@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} server
+  button(type="button", class="btn btn-secondary", onclick="doReduce()") Press Me
+  div(id = "reduce") Reduce the value.
+  script.
+    var count  = 20;
+    var change = -1;
+    function doReduce(){
+      count = count+change;
+      change = change-1;
+      document.getElementById("reduce").innerHTML= `Count ${count} with change ${change}`
+    }
+  a(href= '/grass') grass page
