@@ -1,0 +1,51 @@
+
+extends layout
+
+block content
+    h1= title
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let grassid = toShow._id
+        - let Grass_Name= toShow.Grass_Name
+        - let Grass_color = toShow.Grass_color
+        - let Height = toShow.Height
+        - let actionid = "/resource/grass/" + grassid
+        script let actionid = "#{actionid}"
+        div
+            div.row
+                div(class='grassAttr mr-3') grass ID is:
+                div #{grassid}
+            div.row
+                div(class='grassAttr mr-3') grass Name is:
+                div #{Grass_Name}
+            div.row
+                div(class='grassAttr mr-3') grass Breed is:
+                div #{Grass_color}
+            div.row
+                div(class='grassAttr mr-3') grass Cost is:
+                div #{Height}
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+        function cancel() {
+            // Go back to the home page for the grass collection
+            window.location.href='/grass'
+        }
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+            // delete first
+            fetch(actionid, {
+                method: 'DELETE' // Don't need a body for the delete
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/grass'
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Delete failed " + error )
+            });
+        }

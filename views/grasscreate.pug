@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  form(id='grassForm', action='/resource/grass', method='POST')
+    div.form-group
+      label.grassAttr(for='Grass_Name') grass name
+      input#grass_type(type='text', name='name')
+    div.form-group
+      label.grassAttr(for='Grass_color') grass color
+      input#size(type='text', name='color')
+    div.form-group
+      label.grassAttr(for='Height') height
+      input#cost(type='text', name='Height')
+    input(type='submit')
+    script.
+      document.forms['grassForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert('Save succeeded');
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert('Save failed ' + error);
+        });
+      });

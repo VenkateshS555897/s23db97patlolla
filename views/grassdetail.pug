@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  if toShow
+    - let grassid = toShow._id
+    - let Grass_Name = toShow.Grass_Name
+    - let Grass_color = toShow.Grass_color
+    - let Height = toShow.Height
+    div
+      div.row
+        div(class='grassAttr mr-3') grass ID is:
+        div #{grassid}
+      div.row
+        div(class='grassAttr mr-3') grass name is:
+        div #{Grass_Name}
+      div.row
+        div(class='grassAttr mr-3') grass color is:
+        div #{Grass_color}
+      div.row
+        div(class='grassAttr mr-3') grass Height is:
+        div #{Height}
+  else
+    h2 No instance to delete

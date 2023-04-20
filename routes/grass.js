@@ -1,4 +1,5 @@
 var express = require('express');
+const grass_controllers = require('../controllers/grass');
 var router = express.Router();
 
 /* GET home page. */
@@ -7,3 +8,15 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+/* GET detail grass page */
+router.get('/detail', grass_controllers.grass_view_one_Page);
+
+/* GET detail grass page */
+router.get('/create', grass_controllers.grass_create_Page);
+
+/* GET detail grass page */
+router.get('/update', grass_controllers.grass_update_Page);
+
+/* GET detail grass page */
+router.get('/delete', grass_controllers.grass_delete_Page);

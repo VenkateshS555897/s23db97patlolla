@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  h1= title
+  if toShow
+    - let grassid = toShow._id
+    - let Grass_Name = toShow.Grass_Name
+    - let Grass_color = toShow.Grass_color
+    - let Height = toShow.Height
+
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{grassid}
+      - let actionid = "/resource/grass/" + grassid
+      form(id='grassForm', action= actionid, method="PUT")
+        div.form-group
+          label.grassAttr(for='Grass_Name') grass name
+          input#grass_type(type='text', name='Grass_Name', value= Grass_Name )
+        div.form-group
+          label.grassAttr(for='Grass_color') grass color
+          input#size(type='text', name='Grass_color', value= Grass_color )
+        div.form-group
+          label.grassAttr(for='Height') height
+          input#cost(type='text', name='Height', value= Height )
+        input(type="submit")
+        script.
+          document.forms['grassForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+              return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+              alert("Update succeeded")
+              // TODO handle body
+            }).catch((error) => {
+              // TODO handle error
+              alert("Update failed " + error )
+            });
+          });
+  else
+    h2 No instance to delete
