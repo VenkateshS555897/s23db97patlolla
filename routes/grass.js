@@ -2,13 +2,15 @@ var express = require('express');
 const grass_controllers = require('../controllers/grass');
 var router = express.Router();
 
-/* GET home page. */
+/* GET home page.
 router.get('/', function(req, res, next) {
-  res.render('grass', { title: 'Grass' });
+  res.render('grass', { title: 'grass' });
 });
-
+ */
 module.exports = router;
-
+/* GET detail grass page */
+router.get('/', grass_controllers.grass_view_all_Page);
+router.get('/grass/:id', grass_controllers.grass_detail);
 /* GET detail grass page */
 router.get('/detail', grass_controllers.grass_view_one_Page);
 

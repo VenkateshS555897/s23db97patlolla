@@ -1,14 +1,19 @@
 extends layout
 
 block content
-    h1= title
-    -
-     let grass  = [{"Grass_Name": "Kentucky bluegrass", "Grass_color": "Brown", "Height": "Big",},
-      { "Grass_Name": "Tall Fescue", "Grass_color": "Red", "Height": "medium",},
-       {"Grass_Name": "Ryegrass", "Grass_color": "Yellow", "Height": "small",},]
-    div(class= "container-fluid")
-        div(class = "row")  
-            each item, index in grass 
-                div(class= "col-sm-2", onclick=`grass(${index})`) Name:  #{item.Grass_Name}
-                div(class= "col-sm-2", onclick=`grass(${index})`) Color:  #{item.Grass_color}
-                div(class= "col-sm-2", onclick=`grass(${index})`) Height:   #{item.Height}
+  h1= title
+
+  - let items = results;
+
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch(\"/grass/update?id=${item._id}\")`
+        div(class="row-sm-2 m-1")
+          Item #{item.Grass_Name}(#{item.Grass_color}) is #{item.Height}
+          button.btn(class="btn-primary ml-1", onclick=destination) Update
+
+  script.
+    function dispatch(path) {
+      window.location.href = path;
+    }
