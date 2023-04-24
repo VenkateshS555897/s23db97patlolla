@@ -2,6 +2,13 @@ var express = require('express');
 const grass_controllers = require('../controllers/grass');
 var router = express.Router();
 
+const secured = (req, res, next) => {
+  if (req.user){
+  return next();
+  }
+  req.session.returnTo = req.originalUrl;
+  res.redirect("/login");
+  }
 /* GET home page.
 router.get('/', function(req, res, next) {
   res.render('grass', { title: 'grass' });
@@ -18,7 +25,7 @@ router.get('/detail', grass_controllers.grass_view_one_Page);
 router.get('/create', grass_controllers.grass_create_Page);
 
 /* GET detail grass page */
-router.get('/update', grass_controllers.grass_update_Page);
+router.get('/update',secured, grass_controllers.grass_update_Page);
 
 /* GET detail grass page */
 router.get('/delete', grass_controllers.grass_delete_Page);
