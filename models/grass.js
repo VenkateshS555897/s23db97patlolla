@@ -2,7 +2,16 @@ const mongoose = require("mongoose")
 const grassSchema = mongoose.Schema({
 Grass_Name: String,
 Grass_color: String,
-Height: String
+Height: {
+    type: String,
+    validate: {
+      validator: function (v) {
+        const allowedValues = ["small", "medium", "big"];
+        return allowedValues.includes(v.toLowerCase());
+      },
+      message: "Height must be one of 'small', 'medium', or 'big'",
+    },
+    }
 })
 module.exports = mongoose.model("grass", grassSchema)
 

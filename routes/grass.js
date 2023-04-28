@@ -9,11 +9,6 @@ const secured = (req, res, next) => {
   req.session.returnTo = req.originalUrl;
   res.redirect("/login");
   }
-/* GET home page.
-router.get('/', function(req, res, next) {
-  res.render('grass', { title: 'grass' });
-});
- */
 module.exports = router;
 /* GET detail grass page */
 router.get('/', grass_controllers.grass_view_all_Page);
@@ -22,10 +17,10 @@ router.get('/grass/:id', grass_controllers.grass_detail);
 router.get('/detail', grass_controllers.grass_view_one_Page);
 
 /* GET detail grass page */
-router.get('/create', grass_controllers.grass_create_Page);
+router.get('/create',secured, grass_controllers.grass_create_Page);
 
 /* GET detail grass page */
 router.get('/update',secured, grass_controllers.grass_update_Page);
 
 /* GET detail grass page */
-router.get('/delete', grass_controllers.grass_delete_Page);
+router.get('/delete',secured, grass_controllers.grass_delete_Page);

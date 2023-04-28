@@ -45,7 +45,7 @@ var resourceRouter = require('./routes/resource');
 async function recreateDB(){
 // Delete everything
 await grass.deleteMany();
-  let instance1 = new grass({ Grass_Name: "Kentucky bluegrass", Grass_color: 'Brown', Height: "Big" });
+  let instance1 = new grass({ Grass_Name: "Kentucky bluegrass", Grass_color: 'Brown', Height: "big" });
   let instance2 = new grass({ Grass_Name: "Tall Fescue", Grass_color: 'Red', Height: "medium" });
   let instance3 = new grass({ Grass_Name: "Ryegrass", Grass_color: 'Yellow', Height: "small" })
 

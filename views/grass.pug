@@ -1,19 +1,25 @@
 extends layout
 
 block content
-  h1= title
 
-  - let items = results;
+  - let image = results
+  h1= title
+  - let create = `dispatch(\"/grass/create\")`
+  button.btn(class="btn-info", onclick=create) Add new grass
 
   div(class="container-fluid")
     div(class="row m-1")
-      each item in items
-        - let destination = `dispatch(\"/grass/update?id=${item._id}\")`
-        div(class="row-sm-2 m-1")
-          Item #{item.Grass_Name}(#{item.Grass_color}) is #{item.Height}
+      each images in image
+        - let destination = `dispatch(\"/grass/update?id=${images._id}\")`
+        - let detail = `dispatch(\"/grass/detail/?id=${images._id}")`
+        - let deleteimages = `dispatch(\"/grass/delete/?id=${images._id}")`      
+        div(class="row-sm-2", class="m-1") 
+          | #{images.Grass_Name} (#{images.Grass_color}) is #{images.Height}
           button.btn(class="btn-primary ml-1", onclick=destination) Update
+          button.btn(class="btn-success", onclick=detail) Details
+          button.btn(class="btn-dark", onclick=deleteimages) Delete
 
   script.
-    function dispatch(path) {
-      window.location.href = path;
+    function dispatch(path){
+      window.location.href = path
     }
